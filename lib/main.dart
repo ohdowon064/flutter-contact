@@ -12,17 +12,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-            title: Align(
-          alignment: Alignment.centerLeft,
-          child: Text("앱임"),
-        )),
-        body: SizedBox(
-          child: ElevatedButton(
-            child: Text("버튼임"),
-            onPressed: () {
-              print("버튼 눌림");
-            },
+          leading: Icon(Icons.menu),
+          title: Align(
+            alignment: Alignment.centerLeft,
+            child: Text("앱임"),
           ),
+          actions: [
+            Icon(Icons.search),
+            Icon(Icons.more_vert),
+          ],
         ),
       ),
     );

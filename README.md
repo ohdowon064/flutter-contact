@@ -75,5 +75,10 @@ samples, guidance on mobile development, and a full API reference.
 - TextButton(), IconButton(), ElevatedButton() 중 택1
 - onPressed: () { 로직 } -> 버튼 클릭시 실행할 함수
 
+## 앱바 디자인
+- title
+- leading: IconButton(icon: Icon(Icons.아이콘이름), onPressed: () { 로직 })
+    - 좌측상단 메뉴만들 때 자주쓴다.
+- actions: []: 우측에 들어갈 아이콘들
 ## 레이아웃 잘 만들기
 
