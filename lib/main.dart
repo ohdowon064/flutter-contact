@@ -6,13 +6,24 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
-      home: Center(
-        child: Container(width: 50, height: 50, color: Colors.blue)
-      )
+        home: Scaffold(
+            appBar: AppBar(title: Align(alignment: Alignment.centerLeft, child: Text("앱임"),)),
+            body: Text("안녕하세요"),
+            bottomNavigationBar: BottomAppBar(
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Icon(Icons.phone),
+                      Icon(Icons.message),
+                      Icon(Icons.contact_page)
+                    ]
+                )
+            )
+        )
     );
   }
 }
