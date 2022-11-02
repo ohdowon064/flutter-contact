@@ -91,7 +91,7 @@ samples, guidance on mobile development, and a full API reference.
 4. 마무리 디자인
    - 마진, 패딩, 사이즈, 정렬 등
 
-## Flexible
+## Flexible, Expanded
 - 박스폭을 %로 설정: Flexible()로 감싼다.
 - Row안에서 박스 하나만 꽉채우고 싶으면 Expanded()
   - flex: 1가진 Flexible 박스와 동일 
@@ -100,3 +100,5 @@ samples, guidance on mobile development, and a full API reference.
 1. 사이즈가 이상한 경우
 2. 위치가 이상한 경우
 3. DevTools로 확인하기
+4. 글자와 아이콘의 크기는 작다.
+   - 정렬했는데도 안 움직이면 박스크기가 너무 작은지 의심해보자.
