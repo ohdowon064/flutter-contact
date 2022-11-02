@@ -44,3 +44,18 @@ samples, guidance on mobile development, and a full API reference.
 - margin, hegith 등 설정이 안되면 Container()로 감싸서 설정
   - Container()는 좀 무겁다. 
   - width, hegith만 필요하면 가벼운 SizedBox()로 사용 가능
+
+## 박스 잘그리기
+- Container()
+  - margin, padding, color, width, hegith, decoration 등 설정 가능
+  - decoration: BoxDecoration(
+      color: Colors.색상, -> Container의 color 옵션과 동시에 사용할 수 없음
+      border: Border.all(color: Colors.색상, width: 1),
+      borderRadius: BorderRadius.circular(10),
+    )
+  - EdgeInsets.all(10): 모든 방향에 10lp
+  - EdgeInsets.only(left: 10, right: 10): 왼쪽, 오른쪽에 10lp
+  - EdgeInsets.fromLTRB(10, 20, 30, 40): 왼쪽 10lp, 위쪽 20lp, 오른쪽 30lp, 아래쪽 40lp
+  - 중앙정렬: Center(), 다른 정렬: Align으로 감싸면 정렬가능
+  - 꽉차게: width: double.infinity, height: double.infinity
+- 위젯을 감싸야할 때는 오른쪽에 전구를 사용하자!!
