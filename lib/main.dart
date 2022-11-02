@@ -14,9 +14,8 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(),
         body: Row(
           children: [
-            Flexible(child: Container(color: Colors.blue), flex: 5,),
-            Flexible(child: Container(color: Colors.green), flex: 5),
-            Flexible(child: Container(color: Colors.red), flex: 5),
+            Expanded(child: Container(color: Colors.blue),),
+            Container(width: 100, color: Colors.green),
           ],
         ),
       ),

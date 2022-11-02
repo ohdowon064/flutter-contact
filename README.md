@@ -93,4 +93,10 @@ samples, guidance on mobile development, and a full API reference.
 
 ## Flexible
 - 박스폭을 %로 설정: Flexible()로 감싼다.
-- Row안에서 박스 하나만 꽉채우고 싶으면 Expended()
+- Row안에서 박스 하나만 꽉채우고 싶으면 Expanded()
+  - flex: 1가진 Flexible 박스와 동일 
+
+## 박스 디자인이 의도와 다를 경우
+1. 사이즈가 이상한 경우
+2. 위치가 이상한 경우
+3. DevTools로 확인하기
