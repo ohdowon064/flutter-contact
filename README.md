@@ -80,5 +80,13 @@ samples, guidance on mobile development, and a full API reference.
 - leading: IconButton(icon: Icon(Icons.아이콘이름), onPressed: () { 로직 })
     - 좌측상단 메뉴만들 때 자주쓴다.
 - actions: []: 우측에 들어갈 아이콘들
-## 레이아웃 잘 만들기
 
+## 레이아웃 잘 만들기
+아래 순서를 따라가기
+1. 예시 디자인(화면) 준비
+2. 예시화면에 네모 그리기
+   - 빈 공간 없게 네모 그리기
+3. 바깐 네모부터 하나하나 위젯으로 만들기
+    - 가로정렬 -> Row, 세로정렬 -> Column
+4. 마무리 디자인
+   - 마진, 패딩, 사이즈, 정렬 등
