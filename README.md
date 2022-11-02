@@ -59,3 +59,20 @@ samples, guidance on mobile development, and a full API reference.
   - 중앙정렬: Center(), 다른 정렬: Align으로 감싸면 정렬가능
   - 꽉차게: width: double.infinity, height: double.infinity
 - 위젯을 감싸야할 때는 오른쪽에 전구를 사용하자!!
+
+## 타이포그래피(글자디자인)
+- Text()
+  - style: TextStyle(
+      color: Colors.색상, 또는 Color(0xFF000000) 또는 Colors.fromRGBO(0, 0, 0, 1)
+      fontSize: 20,
+      fontWeight: FontWeight.두께,
+      fontStyle: FontStyle.기울임
+    )
+
+- 아이콘 스타일 -> color, size
+
+## 버튼 위젯
+- TextButton(), IconButton(), ElevatedButton() 중 택1
+
+## 레이아웃 잘 만들기
+
