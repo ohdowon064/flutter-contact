@@ -41,3 +41,6 @@ samples, guidance on mobile development, and a full API reference.
 - Column(children: []): 위젯 세로로 배치
   - mainAxisAlignment: MainAxisAlignment.정렬방식 -> 메인축 정렬(Row -> 가로, Column -> 세로)
   - crossAxisAlignment: CrossAxisAlignment.정렬방식 -> 메인의 반대축 정렬(Row -> 세로, Column -> 가로)
+- margin, hegith 등 설정이 안되면 Container()로 감싸서 설정
+  - Container()는 좀 무겁다. 
+  - width, hegith만 필요하면 가벼운 SizedBox()로 사용 가능
