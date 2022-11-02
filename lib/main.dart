@@ -10,14 +10,21 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: Scaffold(
-            appBar: AppBar(title: Align(alignment: Alignment.centerLeft, child: Text("앱임"),)),
-            body: SizedBox(
-              child: Text("안녕하세요",
-                style: TextStyle(color: Colors.red, fontSize: 30, fontStyle: FontStyle.italic, fontWeight: FontWeight.bold),
-              ),
-            )
-        )
+      home: Scaffold(
+        appBar: AppBar(
+            title: Align(
+          alignment: Alignment.centerLeft,
+          child: Text("앱임"),
+        )),
+        body: SizedBox(
+          child: ElevatedButton(
+            child: Text("버튼임"),
+            onPressed: () {
+              print("버튼 눌림");
+            },
+          ),
+        ),
+      ),
     );
   }
 }

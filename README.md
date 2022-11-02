@@ -73,6 +73,7 @@ samples, guidance on mobile development, and a full API reference.
 
 ## 버튼 위젯
 - TextButton(), IconButton(), ElevatedButton() 중 택1
+- onPressed: () { 로직 } -> 버튼 클릭시 실행할 함수
 
 ## 레이아웃 잘 만들기
 
