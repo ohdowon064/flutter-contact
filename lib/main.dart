@@ -11,15 +11,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          leading: Icon(Icons.menu),
-          title: Align(
-            alignment: Alignment.centerLeft,
-            child: Text("앱임"),
-          ),
-          actions: [
-            Icon(Icons.search),
-            Icon(Icons.more_vert),
+        appBar: AppBar(),
+        body: Row(
+          children: [
+            Flexible(child: Container(color: Colors.blue), flex: 5,),
+            Flexible(child: Container(color: Colors.green), flex: 5),
+            Flexible(child: Container(color: Colors.red), flex: 5),
           ],
         ),
       ),

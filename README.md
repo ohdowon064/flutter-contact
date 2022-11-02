@@ -90,3 +90,7 @@ samples, guidance on mobile development, and a full API reference.
     - 가로정렬 -> Row, 세로정렬 -> Column
 4. 마무리 디자인
    - 마진, 패딩, 사이즈, 정렬 등
+
+## Flexible
+- 박스폭을 %로 설정: Flexible()로 감싼다.
+- Row안에서 박스 하나만 꽉채우고 싶으면 Expended()
