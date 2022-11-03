@@ -102,3 +102,24 @@ samples, guidance on mobile development, and a full API reference.
 3. DevTools로 확인하기
 4. 글자와 아이콘의 크기는 작다.
    - 정렬했는데도 안 움직이면 박스크기가 너무 작은지 의심해보자.
+
+## 커스텀 위젯
+- 직접 위젯을 정의해서 사용
+  - extends StatelessWidget
+  - build가 있어야 위젯이 된다.
+- 변수, 함수에도 담을 수 있는데 성능문제 때문에 사용하지 않는다.
+  - 앱바, 하단바같이 변하지않는 애들은 변수, 함수 축약해도 됨.
+- 커스텀 위젯을 자주 사용하면 state 관리가 힘들다
+- 재사용이 많은 UI
+- 큰 페이지는 커스텀 위젯으로 나누는게 좋다.
+
+## ListView
+- ListView.builder() -> 리스트뷰를 만들어주는 함수
+  - itemCount: 10, -> 리스트뷰의 갯수
+  - itemBuilder: (context, index) { -> 리스트뷰의 내용
+    - return Text('리스트뷰 내용');
+  - }
+- 스크롤바 생김
+- contoller: ScrollController() -> 스크롤 위치를 알 수 있다.
+- 메모리 절약 기능 존재
+  - 유저 스크롤 위치에 따라 안 보이는 데이터 메모리 삭제해줌
