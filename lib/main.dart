@@ -20,28 +20,7 @@ class MyApp extends StatelessWidget {
             Profile(),
           ],
         ),
-        bottomNavigationBar: BottomAppBar(
-          child: SizedBox(
-            height: 70,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.phone),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.message),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.contact_page),
-                ),
-              ],
-            ),
-          ),
-        ),
+        bottomNavigationBar: BottomMenu(),
       ),
     );
   }
@@ -72,8 +51,27 @@ class BottomMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: Text("안녕"),
+    return BottomAppBar(
+      child: SizedBox(
+        height: 70,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.phone),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.message),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.contact_page),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
