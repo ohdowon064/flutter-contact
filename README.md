@@ -58,7 +58,7 @@ samples, guidance on mobile development, and a full API reference.
   - EdgeInsets.fromLTRB(10, 20, 30, 40): 왼쪽 10lp, 위쪽 20lp, 오른쪽 30lp, 아래쪽 40lp
   - 중앙정렬: Center(), 다른 정렬: Align으로 감싸면 정렬가능
   - 꽉차게: width: double.infinity, height: double.infinity
-- 위젯을 감싸야할 때는 오른쪽에 전구를 사용하자!!
+- 위젯을 감싸야할 때는 좌측에 나타나는 IDE 전구를 사용하자!!
 
 ## 타이포그래피(글자디자인)
 - Text()
@@ -114,11 +114,7 @@ samples, guidance on mobile development, and a full API reference.
 - 큰 페이지는 커스텀 위젯으로 나누는게 좋다.
 
 ## ListView
-- ListView.builder() -> 리스트뷰를 만들어주는 함수
-  - itemCount: 10, -> 리스트뷰의 갯수
-  - itemBuilder: (context, index) { -> 리스트뷰의 내용
-    - return Text('리스트뷰 내용');
-  - }
+- ListView -> 리스트뷰를 만들어주는 함수
 - 스크롤바 생김
 - contoller: ScrollController() -> 스크롤 위치를 알 수 있다.
 - 메모리 절약 기능 존재
