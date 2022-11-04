@@ -119,3 +119,4 @@ samples, guidance on mobile development, and a full API reference.
 - contoller: ScrollController() -> 스크롤 위치를 알 수 있다.
 - 메모리 절약 기능 존재
   - 유저 스크롤 위치에 따라 안 보이는 데이터 메모리 삭제해줌
+- ListTile() -> 그림, 텍스트  쉽게 만든다.

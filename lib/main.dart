@@ -35,16 +35,14 @@ class Profile extends StatelessWidget {
       height: 60,
       width: 100,
       padding: EdgeInsets.all(10),
-      child: Row(
-        children: [
-          Icon(Icons.person_pin, size: 50),
-          Container(margin: EdgeInsets.all(10), child: Text('홍길동')),
-        ],
+      child: ListTile(
+        leading: Icon(Icons.person_pin, size: 40),
+        title: Text('Name'),
+        subtitle: Text('Description'),
       ),
     );
   }
 }
-
 
 class BottomMenu extends StatelessWidget {
   const BottomMenu({Key? key}) : super(key: key);
