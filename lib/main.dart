@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MaterialApp(home: MyApp()));
+  runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -16,29 +16,35 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            showDialog(context: context, builder: (context) {
-              print(context.findAncestorWidgetOfExactType<MaterialApp>());
-              return Dialog(child: Text("Hello"));
-            });
-          },
-          child: Icon(Icons.smart_button),
+    return MaterialApp(
+      home: Scaffold(
+          floatingActionButton: Builder(
+            builder: (context) {
+              return FloatingActionButton(
+                onPressed: () {
+                  showDialog(context: context, builder: (context) {
+                    print(context.findAncestorWidgetOfExactType<MaterialApp>());
+                    return Dialog(child: Text("Hello"));
+                  });
+                },
+                child: Icon(Icons.smart_button),
+              );
+            }
+          ),
+          appBar: AppBar(),
+          body: ListView.builder(
+            itemCount: 100,
+            itemBuilder: (context, index) {
+              return ListTile(
+                leading: Icon(Icons.person_pin, size: 50),
+                title: Text(name[index % name.length]),
+                subtitle: Text('Description'),
+              );
+            },
+          ),
+          bottomNavigationBar: BottomMenu(),
         ),
-        appBar: AppBar(),
-        body: ListView.builder(
-          itemCount: 100,
-          itemBuilder: (context, index) {
-            return ListTile(
-              leading: Icon(Icons.person_pin, size: 50),
-              title: Text(name[index % name.length]),
-              subtitle: Text('Description'),
-            );
-          },
-        ),
-        bottomNavigationBar: BottomMenu(),
-      );
+    );
   }
 }
 
