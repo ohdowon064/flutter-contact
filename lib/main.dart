@@ -1,24 +1,39 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+
+
+class MyApp extends StatefulWidget {
+  MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  var a = 1;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            setState(() {
+              a++;
+            });
+          },
+          child: Text(a.toString()),
+        ),
         appBar: AppBar(),
-        body: ListView(
-          children: [
-            Profile(),
-            Profile(),
-            Profile(),
-            Profile(),
-          ],
+        body: ListView.builder(
+          itemCount: 100,
+          itemBuilder: (context, index) {
+            return Profile();
+          },
         ),
         bottomNavigationBar: BottomMenu(),
       ),
@@ -31,16 +46,11 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 60,
-      width: 100,
-      padding: EdgeInsets.all(10),
-      child: ListTile(
+    return ListTile(
         leading: Icon(Icons.person_pin, size: 40),
         title: Text('Name'),
         subtitle: Text('Description'),
-      ),
-    );
+      );
   }
 }
 

@@ -120,3 +120,20 @@ samples, guidance on mobile development, and a full API reference.
 - 메모리 절약 기능 존재
   - 유저 스크롤 위치에 따라 안 보이는 데이터 메모리 삭제해줌
 - ListTile() -> 그림, 텍스트  쉽게 만든다.
+
+## ListView.builder
+- itemCount: 생성 개수
+- itemBuilder: 아이템 생성 함수(context, index) { return Widget() }
+  - context: 
+  - index: 0부터 1씩 증가하는 정수
+
+## 재렌더링
+- state 쓰면 자동으로 재렌더링된다.
+- 자료저장은 변수와 state가 있다.
+  - 변수: 일반 변수
+  - state: 값이 변하면 state를 쓰는 위젯들이 자동으로 재렌더링된다.
+- state 만드는 법
+  - StatefulWidget 만들기
+  - statefulewidget안(단, 두번째클래스)에서는 변수가 state가 된다.
+- state 변경하려면 setState((){여기서변경})를 써야한다.
+- 자주 바뀌는 걸 state로 쓰자.
