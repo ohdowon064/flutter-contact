@@ -4,8 +4,6 @@ void main() {
   runApp(MyApp());
 }
 
-
-
 class MyApp extends StatefulWidget {
   MyApp({Key? key}) : super(key: key);
 
@@ -14,43 +12,44 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  var a = 1;
+  var itemCount = 100;
+  var name = ["홍길동", "김길동", "이길동", "박길동", "최길동"];
+  var likes = List<int>.generate(100, (index) => 0);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            setState(() {
-              a++;
-            });
-          },
-          child: Text(a.toString()),
-        ),
         appBar: AppBar(),
         body: ListView.builder(
           itemCount: 100,
           itemBuilder: (context, index) {
-            return Profile();
+            return ListTile(
+              leading: Text("${likes[index]}"),
+              title: Text(name[index % name.length]),
+              subtitle: Text('Description'),
+              trailing: TextButton(
+                onPressed: () {
+                  setState(() {
+                    likes[index]++;
+                  });
+                },
+                child: SizedBox(
+                  child: Text(
+                    "좋아요",
+                    style: TextStyle(
+                      backgroundColor: Colors.blue,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            );
           },
         ),
         bottomNavigationBar: BottomMenu(),
       ),
     );
-  }
-}
-
-class Profile extends StatelessWidget {
-  const Profile({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-        leading: Icon(Icons.person_pin, size: 40),
-        title: Text('Name'),
-        subtitle: Text('Description'),
-      );
   }
 }
 
