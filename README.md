@@ -137,3 +137,18 @@ samples, guidance on mobile development, and a full API reference.
   - statefulewidget안(단, 두번째클래스)에서는 변수가 state가 된다.
 - state 변경하려면 setState((){여기서변경})를 써야한다.
 - 자주 바뀌는 걸 state로 쓰자.
+
+## dialog
+- 모달창
+- showDialog(context: context, builder: (context) { return AlertDialog() })
+
+## flutter에서 context란?
+- 부모 위젯의 정보를 담고있는 변수
+  - 여기서 부모는 상속한 클래스가 아니라 이 위젯을 호출한 위젯을 의미한다.
+- 어기서 씀?
+  - showDialog.of(context)
+  - Scaffold.of(context)
+  - Navigator.of(context)
+  - Theme.of(context)
+- 단, MaterialApp을 포함한 context이어야 한다.
+- Builder로 감싸면 context를 생성할 수 있다.

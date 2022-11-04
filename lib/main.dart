@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MaterialApp(home: MyApp()));
 }
 
 class MyApp extends StatefulWidget {
@@ -12,40 +12,33 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  var itemCount = 100;
   var name = ["홍길동", "김길동", "이길동", "박길동", "최길동"];
-  var likes = List<int>.generate(100, (index) => 0);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            showDialog(context: context, builder: (context) {
+              print(context.findAncestorWidgetOfExactType<MaterialApp>());
+              return Dialog(child: Text("Hello"));
+            });
+          },
+          child: Icon(Icons.smart_button),
+        ),
         appBar: AppBar(),
         body: ListView.builder(
           itemCount: 100,
           itemBuilder: (context, index) {
             return ListTile(
-              leading: Text("${likes[index]}"),
+              leading: Icon(Icons.person_pin, size: 50),
               title: Text(name[index % name.length]),
               subtitle: Text('Description'),
-              trailing: TextButton(
-                onPressed: () {
-                  setState(() {
-                    likes[index]++;
-                  });
-                },
-                child: Text("좋아요", style: TextStyle(color: Colors.white)),
-                style: TextButton.styleFrom(
-                  backgroundColor: Colors.blue,
-                  padding: EdgeInsets.all(10),
-                ),
-              ),
             );
           },
         ),
         bottomNavigationBar: BottomMenu(),
-      ),
-    );
+      );
   }
 }
 
