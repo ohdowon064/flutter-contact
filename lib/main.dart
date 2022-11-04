@@ -34,14 +34,10 @@ class _MyAppState extends State<MyApp> {
                     likes[index]++;
                   });
                 },
-                child: SizedBox(
-                  child: Text(
-                    "좋아요",
-                    style: TextStyle(
-                      backgroundColor: Colors.blue,
-                      color: Colors.white,
-                    ),
-                  ),
+                child: Text("좋아요", style: TextStyle(color: Colors.white)),
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                  padding: EdgeInsets.all(10),
                 ),
               ),
             );
