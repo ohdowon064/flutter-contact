@@ -159,3 +159,4 @@ samples, guidance on mobile development, and a full API reference.
 2. 등록
    - 자식위젯({Key? key, this.작명})
 3. 사용 (read-only가 좋다.)
+- 자식이 부모에게 state 전송은 안된다.

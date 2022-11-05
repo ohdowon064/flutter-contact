@@ -30,11 +30,25 @@ class _MyAppState extends State<MyApp> {
               title: Text(name[index % 5]),
               subtitle: Text(phoneNumbers[index]),
               onTap: () {
+                setState(() {
+                  currentIndex = index;
+                });
                 showDialog(
-                    context: context,
-                    builder: (context) {
-                      return DialogUI(state: itemCount);
-                    });
+                  context: context,
+                  builder: (context) {
+                    return DialogUI(
+                      currentIndex: currentIndex,
+                      phoneNumbers: phoneNumbers,
+                      itemCount: itemCount,
+                      name: name,
+                      setPhoneNumber: (phoneNumber, currentIndex) {
+                        setState(() {
+                          phoneNumbers[currentIndex] = phoneNumber;
+                        });
+                      },
+                    );
+                  },
+                );
               },
             );
           },
@@ -45,8 +59,20 @@ class _MyAppState extends State<MyApp> {
 }
 
 class DialogUI extends StatelessWidget {
-  const DialogUI({Key? key, this.state}) : super(key: key);
-  final state;
+  DialogUI(
+      {Key? key,
+      this.currentIndex,
+      this.phoneNumbers,
+      this.itemCount,
+      this.name,
+      this.setPhoneNumber})
+      : super(key: key);
+  final currentIndex;
+  final phoneNumbers;
+  final itemCount;
+  final name;
+  final setPhoneNumber;
+  var phoneNumber = "010-0000-0000";
 
   @override
   Widget build(BuildContext context) {
@@ -56,8 +82,13 @@ class DialogUI extends StatelessWidget {
         height: 300,
         child: Column(
           children: [
-            Text(state.toString()),
-            TextField(),
+            Text(name[currentIndex % name.length]),
+            TextField(
+              decoration: InputDecoration(hintText: phoneNumbers[currentIndex]),
+              onChanged: (value) {
+                phoneNumber = value;
+              },
+            ),
             Row(
               children: [
                 TextButton(
@@ -67,6 +98,7 @@ class DialogUI extends StatelessWidget {
                     child: Text("Cancel")),
                 TextButton(
                     onPressed: () {
+                      setPhoneNumber(phoneNumber, currentIndex);
                       Navigator.pop(context);
                     },
                     child: Text("OK"))
