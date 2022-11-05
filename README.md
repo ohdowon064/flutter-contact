@@ -171,3 +171,11 @@ samples, guidance on mobile development, and a full API reference.
     - https://pub.dev/packages/permission_handler
 - 안드로이드 참고
   - https://github.com/Baseflow/flutter-permission-handler/blob/master/permission_handler/example/android/app/src/main/AndroidManifest.xml
+- 권한 거절 2번 이상하면 팝업은 뜨지않는다.
+    -> 앱설정 들어가서 유저가 직접 권한 줘야함
+    - openAppSettings() 함수 사용
+- 앱 시작하자마자 권한요청 하지말자. -> 실제 해당 권한이 필요할 때 넣자.
+
+## 위젯 처음 로드될 때 실행
+- initState() -> 위젯이 처음 로드될 때 실행된다.
+

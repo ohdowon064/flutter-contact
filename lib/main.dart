@@ -19,7 +19,15 @@ class _MyAppState extends State<MyApp> {
       print("허락됨");
     }else if(status.isDenied){
       print("거부됨");
+      Permission.contacts.request();
+      openAppSettings();
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();/**/
+    getPermission(); // 이렇게 앱 시작할 때 넣는거 별로임.
   }
 
   var contacts = {
@@ -63,6 +71,7 @@ class _MyAppState extends State<MyApp> {
             );
           },
         ),
+
       ),
       body: ListView.builder(
         itemCount: contacts.length,
