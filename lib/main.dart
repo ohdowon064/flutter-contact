@@ -13,95 +13,68 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   var name = ["홍길동", "김길동", "이길동", "박길동", "최길동"];
-  var phoneNumbers = List<String>.generate(100, (index) => "unknown phone number");
+  var itemCount = 20;
+  var phoneNumbers =
+      List<String>.generate(20, (index) => "unknown phone number");
   var currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-          appBar: AppBar(),
-          body: ListView.builder(
-            itemCount: 100,
-            itemBuilder: (context, index) {
-              return ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                ),
-                onPressed: () {
-                  setState(() {
-                    currentIndex = index;
-                  });
-                  showDialog(context: context, builder: (context) {
-                    return ContactModal();
-                  });
-                },
-                child: ListTile(
-                  leading: Icon(Icons.person_pin, size: 50),
-                  title: Text(name[index % name.length]),
-                  subtitle: Text(phoneNumbers[index]),
-                ),
-              );
-            },
-          ),
-        ),
-    );
-  }
-}
-
-class ContactModal extends StatefulWidget {
-  const ContactModal({Key? key}) : super(key: key);
-
-  @override
-  State<ContactModal> createState() => _ContactModalState();
-}
-
-class _ContactModalState extends State<ContactModal> {
-  var phoneNumber = "010-0000-0000";
-
-  @override
-  Widget build(BuildContext context) {
-    _MyAppState? myApp = context.findAncestorStateOfType<_MyAppState>();
-    return SizedBox(
-      width: 100,
-      height: 100,
-      child: Dialog(
-        child: Column(
-          children: [
-            Text("${myApp?.name[myApp.currentIndex % myApp.name.length]}"),
-            TextField(
-              onChanged: (value) {
-                setState(() {
-                  phoneNumber = value;
-                });
-              },
-              decoration: InputDecoration(
-                hintText: "input phone number",
-              ),
-            ),
-            Row(
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text("Cancel"),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    myApp?.setState(() {
-                      myApp.phoneNumbers[myApp.currentIndex] = phoneNumber;
+        appBar: AppBar(),
+        body: ListView.builder(
+          itemCount: itemCount,
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Text(name[index % 5]),
+              subtitle: Text(phoneNumbers[index]),
+              onTap: () {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return DialogUI(state: itemCount);
                     });
-                    Navigator.of(context).pop();
-                  },
-                  child: Text("Save"),
-                ),
-              ],
-            ),
-          ],
-        )
+              },
+            );
+          },
+        ),
       ),
     );
   }
 }
 
+class DialogUI extends StatelessWidget {
+  const DialogUI({Key? key, this.state}) : super(key: key);
+  final state;
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      child: SizedBox(
+        width: 300,
+        height: 300,
+        child: Column(
+          children: [
+            Text(state.toString()),
+            TextField(),
+            Row(
+              children: [
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text("Cancel")),
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text("OK"))
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}

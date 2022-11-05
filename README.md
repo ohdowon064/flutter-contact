@@ -152,3 +152,10 @@ samples, guidance on mobile development, and a full API reference.
   - Theme.of(context)
 - 단, MaterialApp을 포함한 context이어야 한다.
 - Builder로 감싸면 context를 생성할 수 있다.
+
+## 자식이 부모 state 사용하기
+1. 전송 
+   - 자식위젯(작명: 보낼state)
+2. 등록
+   - 자식위젯({Key? key, this.작명})
+3. 사용 (read-only가 좋다.)
