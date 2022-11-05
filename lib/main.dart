@@ -15,9 +15,11 @@ class _MyAppState extends State<MyApp> {
   var total = 5;
   var name = ["홍길동", "김길동", "이길동", "박길동", "최길동"];
   var currentIndex = 0;
-  addOne() {
+
+  addPerson(personName){
     setState(() {
       total++;
+      name.add(personName);
     });
   }
 
@@ -26,21 +28,21 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(title: Text(total.toString())),
-        floatingActionButton: Builder(
-          builder: (context) {
-            return FloatingActionButton(
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return DialogUI(addOne: addOne,);
-                  },
-                );
-              },
-              child: Icon(Icons.add),
-            );
-          }
-        ),
+        floatingActionButton: Builder(builder: (context) {
+          return FloatingActionButton(
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return DialogUI(
+                    addPerson: addPerson,
+                  );
+                },
+              );
+            },
+            child: Icon(Icons.add),
+          );
+        }),
         body: ListView.builder(
           itemCount: total,
           itemBuilder: (context, index) {
@@ -55,8 +57,9 @@ class _MyAppState extends State<MyApp> {
 }
 
 class DialogUI extends StatelessWidget {
-  const DialogUI({Key? key, this.addOne}) : super(key: key);
-  final addOne;
+  DialogUI({Key? key, this.addPerson}) : super(key: key);
+  final addPerson;
+  var inputName = '';
 
   @override
   Widget build(BuildContext context) {
@@ -67,17 +70,25 @@ class DialogUI extends StatelessWidget {
         child: Column(
           children: [
             Text("Dialog"),
-            TextField(),
+            TextField(
+              onChanged: (text) {
+                inputName = text;
+              },
+              onSubmitted: (text) {
+                addPerson(text);
+                Navigator.pop(context);
+              },
+            ),
             Row(
               children: [
                 TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text("취소")),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text("취소")),
                 TextButton(
                   onPressed: () {
-                    addOne();
+                    addPerson(inputName);
                     Navigator.pop(context);
                   },
                   child: Text("완료"),

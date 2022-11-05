@@ -160,3 +160,8 @@ samples, guidance on mobile development, and a full API reference.
    - 자식위젯({Key? key, this.작명})
 3. 사용 (read-only가 좋다.)
 - 자식이 부모에게 state 전송은 안된다.
+
+## 인풋값 처리하기
+- TextEditingController() -> 인풋값을 받아온다.
+- controller에 등록
+- 더 직관적인 방법 -> onChanged(value) {} 함수를 사용한다.
