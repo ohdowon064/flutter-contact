@@ -1,104 +1,176 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MaterialApp(home: MyApp()));
 }
 
 class MyApp extends StatefulWidget {
-  MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-  var total = 5;
-  var name = ["홍길동", "김길동", "이길동", "박길동", "최길동"];
-  var currentIndex = 0;
+  var contacts = {
+    0: ["홍길동", "010-1234-5678"],
+    1: ["김길동", "010-1234-5678"],
+    2: ["가길동", "010-1234-5678"],
+    3: ["나길동", "010-1234-5678"],
+    4: ["다길동", "010-1234-5678"]
+  };
 
-  addPerson(personName){
+  addContact(name, phoneNumber) {
     setState(() {
-      total++;
-      name.add(personName);
+      contacts[contacts.length] = [name, phoneNumber];
+    });
+  }
+
+  editContact(index, name, phoneNumber) {
+    setState(() {
+      contacts[index] = [name, phoneNumber];
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: Text(total.toString())),
-        floatingActionButton: Builder(builder: (context) {
-          return FloatingActionButton(
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return DialogUI(
-                    addPerson: addPerson,
-                  );
-                },
-              );
-            },
-            child: Icon(Icons.add),
-          );
-        }),
-        body: ListView.builder(
-          itemCount: total,
-          itemBuilder: (context, index) {
-            return ListTile(
-              title: Text(name[index % name.length]),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(contacts.length.toString()),
+        leading: IconButton(
+          icon: Icon(Icons.format_list_numbered_sharp),
+          onPressed: () {
+            setState(
+              () {
+                var sortedContacts = {};
+                var contactsList = contacts.values.toList();
+                contactsList.sort((a, b) => a[0].compareTo(b[0]));
+                for (int i = 0; i < contactsList.length; i++) {
+                  sortedContacts[i] = contactsList[i];
+                }
+                contacts = sortedContacts.cast();
+              },
             );
           },
         ),
+      ),
+      body: ListView.builder(
+        itemCount: contacts.length,
+        itemBuilder: (context, index) {
+          return SizedBox(
+            height: 50,
+            width: double.infinity,
+            child: ListTile(
+              title: Text(contacts[index]![0]),
+              subtitle: Text(contacts[index]![1]),
+              leading: Icon(Icons.person, size: 40),
+              trailing: Wrap(
+                spacing: 12,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        contacts.remove(index);
+                      });
+                    },
+                    icon: Icon(Icons.delete),
+                  ),
+                  IconButton(
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return DialogUI(
+                                  thisName: contacts[index]![0],
+                                  thisPhoneNumber: contacts[index]![1],
+                                  currentIndex: index,
+                                  editContact: editContact);
+                            });
+                      },
+                      icon: Icon(Icons.edit)),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return DialogUI(
+                  thisName: null,
+                  thisPhoneNumber: null,
+                  currentIndex: null,
+                  addContact: addContact,
+                  editContact: editContact);
+            },
+          );
+        },
       ),
     );
   }
 }
 
 class DialogUI extends StatelessWidget {
-  DialogUI({Key? key, this.addPerson}) : super(key: key);
-  final addPerson;
-  var inputName = '';
+  DialogUI(
+      {Key? key,
+      this.thisName,
+      this.thisPhoneNumber,
+      this.currentIndex,
+      this.addContact,
+      this.editContact})
+      : super(key: key);
+  var thisName;
+  var thisPhoneNumber;
+  final currentIndex;
+  final addContact;
+  final editContact;
 
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      child: SizedBox(
+      child: Container(
         width: 300,
         height: 300,
         child: Column(
           children: [
-            Text("Dialog"),
-            Container(
-              width: 250,
-              padding: EdgeInsets.only(bottom: 10),
-              child: TextField(
-                onChanged: (text) {
-                  inputName = text;
-                },
-                onSubmitted: (text) {
-                  addPerson(text);
+            TextField(
+              decoration: InputDecoration(
+                hintText: thisName,
+              ),
+              onChanged: (name) {
+                thisName = name;
+              },
+            ),
+            TextField(
+              decoration: InputDecoration(
+                hintText: thisPhoneNumber,
+              ),
+              onChanged: (phoneNumber) {
+                thisPhoneNumber = phoneNumber;
+              },
+            ),
+            TextButton(
+                onPressed: () {
                   Navigator.pop(context);
                 },
-              ),
-            ),
-            Row(
-              children: [
-                TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text("취소")),
-                TextButton(
-                  onPressed: () {
-                    addPerson(inputName);
-                    Navigator.pop(context);
-                  },
-                  child: Text("완료"),
-                ),
-              ],
-            )
+                child: Text("취소")),
+            TextButton(
+                onPressed: () {
+                  if (thisName == "" || thisPhoneNumber == "") {
+                    return;
+                  }
+                  if (currentIndex == null) {
+                    addContact(thisName, thisPhoneNumber);
+                  } else {
+                    editContact(currentIndex, thisName, thisPhoneNumber);
+                  }
+                  Navigator.pop(context);
+                },
+                child: Text("확인")),
           ],
         ),
       ),
