@@ -70,14 +70,18 @@ class DialogUI extends StatelessWidget {
         child: Column(
           children: [
             Text("Dialog"),
-            TextField(
-              onChanged: (text) {
-                inputName = text;
-              },
-              onSubmitted: (text) {
-                addPerson(text);
-                Navigator.pop(context);
-              },
+            Container(
+              width: 250,
+              padding: EdgeInsets.only(bottom: 10),
+              child: TextField(
+                onChanged: (text) {
+                  inputName = text;
+                },
+                onSubmitted: (text) {
+                  addPerson(text);
+                  Navigator.pop(context);
+                },
+              ),
             ),
             Row(
               children: [
