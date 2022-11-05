@@ -165,3 +165,9 @@ samples, guidance on mobile development, and a full API reference.
 - TextEditingController() -> 인풋값을 받아온다.
 - controller에 등록
 - 더 직관적인 방법 -> onChanged(value) {} 함수를 사용한다.
+
+## 권한 요청
+- permission_handler 패키지 사용
+    - https://pub.dev/packages/permission_handler
+- 안드로이드 참고
+  - https://github.com/Baseflow/flutter-permission-handler/blob/master/permission_handler/example/android/app/src/main/AndroidManifest.xml

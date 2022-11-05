@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 void main() {
   runApp(MaterialApp(home: MyApp()));
@@ -12,6 +13,15 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  getPermission() async {
+    var status = await Permission.contacts.status;
+    if (status.isGranted) {
+      print("허락됨");
+    }else if(status.isDenied){
+      print("거부됨");
+    }
+  }
+
   var contacts = {
     0: ["홍길동", "010-1234-5678"],
     1: ["김길동", "010-1234-5678"],
@@ -70,7 +80,13 @@ class _MyAppState extends State<MyApp> {
                   IconButton(
                     onPressed: () {
                       setState(() {
-                        contacts.remove(index);
+                        var copiedContacts = {...contacts};
+                        copiedContacts.remove(index);
+                        var i = 0;
+                        copiedContacts.entries.forEach((element) {
+                            contacts[i++] = [element.value[0], element.value[1]];
+                        });
+                        contacts.remove(i);
                       });
                     },
                     icon: Icon(Icons.delete),
