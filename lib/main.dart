@@ -24,12 +24,6 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
-  @override
-  void initState() {
-    super.initState();/**/
-    getPermission(); // 이렇게 앱 시작할 때 넣는거 별로임.
-  }
-
   var contacts = {
     0: ["홍길동", "010-1234-5678"],
     1: ["김길동", "010-1234-5678"],
@@ -71,7 +65,12 @@ class _MyAppState extends State<MyApp> {
             );
           },
         ),
-
+        actions: [
+          IconButton(
+            onPressed: () {getPermission();},
+            icon: Icon(Icons.settings),
+          )
+        ],
       ),
       body: ListView.builder(
         itemCount: contacts.length,
