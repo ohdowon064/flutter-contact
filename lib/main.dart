@@ -14,22 +14,16 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   getPermission() async {
     var status = await Permission.contacts.status;
     if (status.isGranted) {
       print("허락됨");
-      var obtainedContacts = await ContactsService.getContacts(); // 오래걸리는 코드는 async 가능하면 await 붙이자.
+      var myContacts = await ContactsService
+          .getContacts(); // 오래걸리는 코드는 async 가능하면 await 붙이자.
       setState(() {
-        contacts = obtainedContacts;
+        contacts = myContacts;
       });
-      // print(contacts[0].displayName);
-      var newPerson = Contact();
-      newPerson.givenName = "John";
-      newPerson.familyName = "Doe";
-      await ContactsService.addContact(newPerson);
-
-    }else if(status.isDenied){
+    } else if (status.isDenied) {
       print("거부됨");
       Permission.contacts.request();
       openAppSettings();
@@ -40,13 +34,11 @@ class _MyAppState extends State<MyApp> {
 
   addContact(name, phoneNumber) {
     setState(() {
-      contacts[contacts.length] = [name, phoneNumber];
-    });
-  }
-
-  editContact(index, name, phoneNumber) {
-    setState(() {
-      contacts[index] = [name, phoneNumber];
+      var newPerson = Contact();
+      newPerson.displayName = name;
+      newPerson.phones = [Item(label: "mobile", value: phoneNumber)];
+      ContactsService.addContact(newPerson);
+      contacts.add(newPerson);
     });
   }
 
@@ -57,8 +49,10 @@ class _MyAppState extends State<MyApp> {
         title: Text(contacts.length.toString()),
         actions: [
           IconButton(
-            onPressed: () {getPermission();},
-            icon: Icon(Icons.settings),
+            onPressed: () {
+              getPermission();
+            },
+            icon: Icon(Icons.contacts),
           )
         ],
       ),
@@ -71,9 +65,60 @@ class _MyAppState extends State<MyApp> {
             child: ListTile(
               title: Text(contacts[index]!.displayName),
               leading: Icon(Icons.person, size: 40),
+              subtitle: Text(contacts[index]!.phones!.first.value),
             ),
           );
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showDialog(
+              context: context,
+              builder: (context) {
+                return DialogUI(addContact: addContact);
+              });
+        },
+        child: Icon(Icons.add),
+      ),
+    );
+  }
+}
+
+class DialogUI extends StatelessWidget {
+  DialogUI({Key? key, this.addContact}) : super(key: key);
+  final addContact;
+  var currentName = '';
+  var currentPhoneNumber = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      child: SizedBox(
+        height: 300,
+        width: 300,
+        child: Column(
+          children: [
+            TextField(
+              decoration: InputDecoration(hintText: "이름을 입력하세요."),
+              onChanged: (value) {
+                currentName = value;
+              },
+            ),
+            TextField(
+              decoration: InputDecoration(hintText: "전화번호를 입력하세요."),
+              onChanged: (value) {
+                currentPhoneNumber = value;
+              },
+            ),
+            ElevatedButton(
+              onPressed: () {
+                addContact(currentName, currentPhoneNumber);
+                Navigator.pop(context);
+              },
+              child: Text("저장"),
+            )
+          ],
+        ),
       ),
     );
   }
