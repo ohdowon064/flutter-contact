@@ -179,3 +179,15 @@ samples, guidance on mobile development, and a full API reference.
 ## 위젯 처음 로드될 때 실행
 - initState() -> 위젯이 처음 로드될 때 실행된다.
 
+## 에뮬레이터, 테스트폰은 잘 되는데 왜 유저폰은 안되나?
+- 유저폰은 더럽다!
+- null 체크 필수! 
+  - data ?? null일경우값
+- 타입 지정 필수!
+
+## 빌드
+- 안드로이드
+  - apk
+- 구글
+  - aab
+  - keyfile로 사인해야함

@@ -15,10 +15,10 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   getPermission() async {
-    var status = await Permission.contacts.status;
+    PermissionStatus status = await Permission.contacts.status;
     if (status.isGranted) {
       print("허락됨");
-      var myContacts = await ContactsService
+      List<Contact> myContacts = await ContactsService
           .getContacts(); // 오래걸리는 코드는 async 가능하면 await 붙이자.
       setState(() {
         contacts = myContacts;
@@ -30,7 +30,7 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
-  var contacts = [];
+  List<Contact> contacts = [];
 
   addContact(name, phoneNumber) {
     setState(() {
@@ -63,9 +63,9 @@ class _MyAppState extends State<MyApp> {
             height: 50,
             width: double.infinity,
             child: ListTile(
-              title: Text(contacts[index]!.displayName),
+              title: Text(contacts[index].displayName ?? "Unknown Name"),
               leading: Icon(Icons.person, size: 40),
-              subtitle: Text(contacts[index]!.phones!.first.value),
+              subtitle: Text(contacts[index].phones!.first.value ?? "Unknown Phone Number"),
             ),
           );
         },
@@ -87,8 +87,8 @@ class _MyAppState extends State<MyApp> {
 class DialogUI extends StatelessWidget {
   DialogUI({Key? key, this.addContact}) : super(key: key);
   final addContact;
-  var currentName = '';
-  var currentPhoneNumber = '';
+  String currentName = '';
+  String currentPhoneNumber = '';
 
   @override
   Widget build(BuildContext context) {
